@@ -1,0 +1,2 @@
+class TemplateReport < ApplicationRecord
+end
