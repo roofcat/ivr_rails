@@ -10,20 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160706184153) do
+ActiveRecord::Schema.define(version: 20160707204233) do
 
   create_table "calls", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "collection"
     t.string   "sp"
-    t.integer  "key"
+    t.bigint   "key"
     t.datetime "beginCall"
-    t.integer  "origin"
+    t.bigint   "origin"
     t.boolean  "callAnswered"
     t.string   "lastState"
-    t.integer  "IVRSel"
+    t.bigint   "IVRSel"
     t.datetime "dialIntentBegin1"
-    t.integer  "dialIntentCaller1"
-    t.integer  "dialIntentCalled1"
+    t.bigint   "dialIntentCaller1"
+    t.bigint   "dialIntentCalled1"
     t.datetime "dialIntentEnd1"
     t.boolean  "dialIntentAnswered1"
     t.string   "sessionFile"
