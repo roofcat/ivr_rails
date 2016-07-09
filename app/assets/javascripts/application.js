@@ -14,3 +14,21 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+
+function notificationModal ( t, b ) {
+  var title = $( '#notificationTitle' );
+  var body = $( '#notificationBody' );
+  title.empty().append( t );
+  body.empty().append( b );
+  $( '#notificationModal' ).modal( 'show', true );
+};
+function timestamp_to_date ( date ) {
+  return moment.unix( date ).format( 'DD-MM-YYYY h:mm:ss a' );
+};
+function date_to_timestamp ( date, max ) {
+  return moment( date, 'DD/MM/YYYY' ).unix();
+};
+function date_to_format ( date ) {
+  return moment( date ).format( 'DD-MM-YYYY H:mm:ss a' );
+};
