@@ -1,4 +1,5 @@
 $(function() {
+  
   var baseUrl = document.location.href;
   // urls busquedas
   var queryUrl = '/search/';
@@ -8,6 +9,7 @@ $(function() {
   var callDetailUrl = 'call-detail/';
   // link dinamico para las rutas de exportar
   var exportLink = '';
+
   $(document).ready(function() {
     baseUrl = baseUrl.split('/');
     delete baseUrl[4];
@@ -15,6 +17,7 @@ $(function() {
     baseUrl = baseUrl.join('/')
     baseUrl = baseUrl.substring(0, baseUrl.length - 1);
     console.log(baseUrl);
+
     setDefaultDates();
     $('#menuModal').modal('show', true);
   });
@@ -23,9 +26,11 @@ $(function() {
     $('#date_from').val(moment().subtract(7, 'days').format('DD/MM/YYYY'));
     $('#date_to').val(moment().format('DD/MM/YYYY'));
   };
+
   $('#showMenu').on('click', function() {
     $('#menuModal').modal('show', true);
   });
+
   $('#run_search').on('click', function() {
     $('#closeMenuModal').click();
     $('#loadingModal').modal('show', true);
