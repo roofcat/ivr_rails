@@ -1,12 +1,12 @@
 $(function() {
-  
+
   var baseUrl = document.location.href;
   // urls busquedas
   var queryUrl = '/search/';
   // urls exportar reportes
   var exportUrl = '/export/';
   // urls para modal detalle de email
-  var callDetailUrl = 'call-detail/';
+  var callDetailUrl = 'calls/';
   // link dinamico para las rutas de exportar
   var exportLink = '';
 
@@ -23,8 +23,8 @@ $(function() {
   });
 
   function setDefaultDates() {
-    $('#date_from').val(moment().subtract(7, 'days').format('DD/MM/YYYY'));
-    $('#date_to').val(moment().format('DD/MM/YYYY'));
+    $('#date_from').val(moment().subtract(7, 'days').format('YYYY-MM-DD'));
+    $('#date_to').val(moment().format('YYYY-MM-DD'));
   };
 
   $('#showMenu').on('click', function() {

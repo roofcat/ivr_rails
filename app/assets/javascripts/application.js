@@ -24,11 +24,11 @@ function notificationModal ( t, b ) {
   $( '#notificationModal' ).modal( 'show', true );
 };
 function timestamp_to_date ( date ) {
-  return moment.unix( date ).format( 'DD-MM-YYYY h:mm:ss a' );
+  return moment.unix( date ).format( 'YYYY-MM-DD h:mm:ss a' );
 };
 function date_to_timestamp ( date, max ) {
-  return moment( date, 'DD/MM/YYYY' ).unix();
+  return moment( date, 'YYYY-MM-DD' ).unix();
 };
 function date_to_format ( date ) {
-  return moment( date ).format( 'DD-MM-YYYY H:mm:ss a' );
+  return moment( date ).format( 'YYYY-MM-DD H:mm:ss a' );
 };

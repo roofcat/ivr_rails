@@ -1,20 +1,59 @@
+<div style="width:100%;height:450px;overflow-y:scroll;">
+  <table class="table table-hover table-striped table-condensed table-responsive" style="font-size: 10px;" id="tableCall">
+    <thead>
+      <th>Detalle</th>
+      <th>Fecha</th>
+      <th>Inicio llamada</th>
+      <th>Nº que llama</th>
+      <th>Contestó IVR</th>
+      <th>Nº Anexo</th>
+      <th>Fecha Inicio</th>
+      <th>Nº que llama</th>
+      <th>Nº donde se transfiere</th>
+      <th>Fecha término</th>
+      <th>Transferencia contestada</th>
+      <th>Término de llamada</th>
+    </thead>
+    <tbody>
+      <% @calls.each do |call| %>
+      <tr>
+        <td align="center">
+          <span style="font-size:16px;color:#2196f3;align:center;cursor:pointer;"
+          title="Click para ver más detalle." class="glyphicon glyphicon-info-sign"
+          id="spanDetail" data-pk="<%= call.id %>"></span>
+        </td>
+        <td><%= call.timeStamp %></td>
+        <td><%= call.beginCall %></td>
+        <td><%= call.origin %></td>
+        <td>
+          <% if call.callAnswered %>
+          <div align="center"><span class="glyphicon glyphicon-ok"></span></div>
+          <% else %>
+          <div align="center"><span class="glyphicon glyphicon-remove"></span></div>
+          <% end %>
+        </td>
+        <td align="center"><%= call.IVRSel %></td>
+        <td><%= call.dialIntentBegin1 %></td>
+        <td><%= call.dialIntentCaller1 %></td>
+        <td><%= call.dialIntentCalled1 %></td>
+        <td><%= call.dialIntentEnd1 %></td>
+        <td>
+          <% if call.dialIntentAnswered1 %>
+          <div align="center"><span class="glyphicon glyphicon-ok"></span></div>
+          <% else %>
+          <div align="center"><span class="glyphicon glyphicon-remove"></span></div>
+          <% end %>
+        </td>
+        <td><%= call.endDial %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
-<table class="table table-hover table-striped table-condensed table-responsive" style="font-size: 10px;" id="tableCall">
-  <thead>
-    <th>Detalle</th>
-		<th>Fecha</th>
-		<th>Inicio llamada</th>
-		<th>Nº que llama</th>
-		<th>Contestó IVR</th>
-		<th>Nº Anexo</th>
-		<th>Fecha Inicio</th>
-		<th>Nº que llama</th>
-		<th>Nº donde se transfiere</th>
-		<th>Fecha término</th>
-		<th>Transferencia contestada</th>
-    <th>Término de llamada</th>
-  </thead>
-</table>
+<div class="digg_pagination">
+  <%= will_paginate @calls, container: false %>
+</div>
 
 <!-- BOTON MATERIAL EXPORT -->
 <div class="csv-download-btn">
@@ -22,8 +61,8 @@
   id="btnGenerateReport" type="button" rel="popover" data-animation="true" data-trigger="hover"
   data-html="true" data-placement="left" data-container="body" data-toggle="popover"
   data-content="<p>Generar Excel y enviármelo como correo electrónico adjunto.">
+    <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
     <div class="ripple-wrapper"></div>
-    <i class="material-icons">send</i>
   </button>
 </div>
 
@@ -33,8 +72,8 @@
 	type="button" rel="popover" data-animation="true" data-trigger="hover"
 	data-html="true" data-placement="left" data-container="body" data-toggle="popover"
 	data-content="<p>Click para abrir panel de filtro por fechas de período.</p>">
+    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 		<div class="ripple-wrapper"></div>
-		<i class="material-icons">search</i>
 	</button>
 </div>
 
@@ -42,40 +81,45 @@
 <div class="modal" id="menuModal" data-backdrop="static" data-keyboard="false">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" id="closeMenuModal" data-dismiss="modal" aria-hidden="true"></button>
-        <h4 class="modal-title">Buscar</h4>
-      </div>
-      <div class="modal-body">
-      	<br>
-      	<div class="row">
-      		<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-          	<div class="form-horizontal">
-            	<div class="form-group form-group-material-indigo has-success">
-								<label class="control-label">Desde</label>
-								<input class="form-control datePicker" type="text" id="date_from">
-								<span class="mdi-action-today" aria-hidden="true"></span>
-							</div>
-          	</div>
-      		</div>
-    	  	<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-          	<div class="form-horizontal">
-    					<div class="form-group form-group-material-indigo has-success">
-    						<label class="control-label">Hasta</label>
-    						<input class="form-control datePicker" type="text" id="date_to">
-    						<span class="mdi-action-today" aria-hidden="true"></span>
-    					</div>
-        	  </div>
-      		</div>
-      	</div>
-      	<!-- FIN DIV BODY -->
-      </div>
-      <div class="modal-footer">
-      	<div class="form-group" align="right" style="margin-right:20px;">
-      		<button class="btn btn-flat btn-info" data-dismiss="modal">Cancelar</button>
-      		<button class="btn btn-raised btn-info" id="run_search">Buscar</button>
-		    </div>
-      </div>
+
+      <form class="" action="/" method="get">
+
+        <div class="modal-header">
+          <button type="button" class="close" id="closeMenuModal" data-dismiss="modal" aria-hidden="true"></button>
+          <h4 class="modal-title">Buscar</h4>
+        </div>
+        <div class="modal-body">
+          <br>
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+              <div class="form-horizontal">
+                <div class="form-group form-group-material-indigo has-success">
+                  <label class="control-label">Desde</label>
+                  <input class="form-control datePicker" type="text" id="date_from" name="date_from">
+                  <span class="mdi-action-today" aria-hidden="true"></span>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+              <div class="form-horizontal">
+                <div class="form-group form-group-material-indigo has-success">
+                  <label class="control-label">Hasta</label>
+                  <input class="form-control datePicker" type="text" id="date_to" name="date_to">
+                  <span class="mdi-action-today" aria-hidden="true"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- FIN DIV BODY -->
+        </div>
+        <div class="modal-footer">
+          <div class="form-group" align="right" style="margin-right:20px;">
+            <button class="btn btn-flat btn-info" data-dismiss="modal">Cancelar</button>
+            <button class="btn btn-raised btn-info" type="submit" id="run_search">Buscar</button>
+          </div>
+        </div>
+
+      </form>
 
     </div>
   </div>
