@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Llamadas">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">Fecha</Data></Cell>
+        <Cell><Data ss:Type="String">Inicio llamada</Data></Cell>
+        <Cell><Data ss:Type="String">Nº que llama</Data></Cell>
+        <Cell><Data ss:Type="String">Contestó IVR</Data></Cell>
+        <Cell><Data ss:Type="String">Nº Anexo</Data></Cell>
+        <Cell><Data ss:Type="String">Fecha Inicio</Data></Cell>
+        <Cell><Data ss:Type="String">Nº que llama</Data></Cell>
+        <Cell><Data ss:Type="String">Nº donde se transfiere</Data></Cell>
+        <Cell><Data ss:Type="String">Fecha término</Data></Cell>
+        <Cell><Data ss:Type="String">Transferencia contestada</Data></Cell>
+        <Cell><Data ss:Type="String">Término de llamada</Data></Cell>
+      </Row>
+    <% @calls.each do |call| %>
+      <Row>
+        <Cell><Data ss:Type="String"><%= call.timeStamp %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= call.beginCall %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= call.origin %></Data></Cell>
+
+        <% if call.callAnswered %>
+          <Cell><Data ss:Type="String">Contestada</Data></Cell>
+        <% else %>
+          <Cell><Data ss:Type="String">No contestada</Data></Cell>
+        <% end %>
+
+        <Cell><Data ss:Type="Number"><%= call.IVRSel %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= call.dialIntentBegin1 %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= call.dialIntentCaller1 %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= call.dialIntentCalled1 %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= call.dialIntentEnd1 %></Data></Cell>
+
+        <% if call.dialIntentAnswered1 %>
+          <Cell><Data ss:Type="String">Contestada</Data></Cell>
+        <% else %>
+          <Cell><Data ss:Type="String">No contestada</Data></Cell>
+        <% end %>
+
+        <Cell><Data ss:Type="String"><%= call.endDial %></Data></Cell>
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>
