@@ -40,11 +40,10 @@ $(function() {
 
   $('#run_search').on('click', function() {
     $('#closeMenuModal').click();
-    $('#loadingModal').modal('show', true);
-    $('#closeLoadingModal').click();
+  });
 
-    exportLink = baseUrl + exportUrl + date_from + '/' + date_to + '/';
-    $('#btnGenerateReport').show();
+  $( '#btnGenerateReport' ).on( 'click', function () {
+    $( '#btnFormExport' ).click();
   });
 
 });

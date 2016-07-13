@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   get 'welcome/dashboard'
 
+  get '/export', to: 'welcome#export', as: 'welcome_export'
+
   resources :calls
 
   devise_for :users
